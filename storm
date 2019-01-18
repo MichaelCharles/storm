@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+require 'vendor/autoload.php';
+
+$app = new Application();
+
+$app->register('conjure')
+    ->addArgument('count')
+    ->setCode(function(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('Conjuring up a cloud.');
+    });
+
+$app->run();

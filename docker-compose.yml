@@ -1,0 +1,32 @@
+version: '3'
+services:
+  c9u01:
+    container_name: c9u01
+    image: mcaubrey/cloud9-s2
+    ports:
+      - 8001:80
+      - 9001:8080
+    environment:
+      WORKSPACE: '/var/www/html'
+    volumes:
+      - ./workspaces/01:/var/www/html
+  c9u02:
+    container_name: c9u02
+    image: mcaubrey/cloud9-s2
+    ports:
+      - 8002:80
+      - 9002:8080
+    environment:
+      WORKSPACE: '/var/www/html'
+    volumes:
+      - ./workspaces/02:/var/www/html
+  c9u03:
+    container_name: c9u03
+    image: mcaubrey/cloud9-s2
+    ports:
+      - 8003:80
+      - 9003:8080
+    environment:
+      WORKSPACE: '/var/www/html'
+    volumes:
+      - ./workspaces/03:/var/www/html
