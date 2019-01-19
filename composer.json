@@ -1,5 +1,25 @@
 {
-	"require": {
-	"symfony/console": "~2.0"
-	}
+    "name": "esu2/storm",
+    "description": "Authors docker-compose files for multiple Cloud9 instances.",
+    "keywords": ["storm"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Charles Aubrey",
+            "email": "michaelcharlesaubrey@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Storm\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/console": "~3.0|~4.0",
+        "symfony/filesystem": "~3.0|~4.0",
+        "symfony/process": "~3.0|~4.0"
+    },
+    "bin": [
+        "storm"
+    ]
 }
