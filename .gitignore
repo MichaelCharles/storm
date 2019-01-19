@@ -1,2 +1,3 @@
 workspaces
 vendor
+composer.lock
