@@ -1,5 +1,5 @@
 {
-    "name": "esu2/storm",
+    "name": "mcaubrey/storm",
     "description": "Authors docker-compose files for multiple Cloud9 instances.",
     "keywords": ["storm"],
     "license": "MIT",
