@@ -2,7 +2,7 @@
 namespace Storm;
 use RuntimeException;
 use Storm\Terminal;
-use Symfony\Component\Filesystem\Filesystem;
+use Storm\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,9 +30,9 @@ class Conjure extends Command
             throw new RuntimeException('Count must be a positive number.');
         }
         $fs = new Filesystem;
-        $term = new Terminal("./workspaces");
+        $term = new Terminal($fs->getHome()."workspaces");
         
-        if ($fs->exists('./workspaces/docker-compose.yml')) {
+        if ($fs->exists($fs->getHome().'workspaces/docker-compose.yml')) {
             throw new RuntimeException("A 'docker-compose.yml' file already exists in the workspaces directory.\n".
                                        "Please run 'storm conjure clear' or remove the file manually.");
         }
@@ -44,22 +44,22 @@ class Conjure extends Command
     
     protected function makeDockerComposeFile($count, Filesystem $fs)
         {
-            $fs->appendToFile('./workspaces/docker-compose.yml', "version: '3'"."\n");
-            $fs->appendToFile('./workspaces/docker-compose.yml', "services:"."\n");
+            $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "version: '3'"."\n");
+            $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "services:"."\n");
             
             $usersArray = $this->makeUsersArray($count);
             
             foreach ($usersArray as $user) {
-                $fs->appendToFile('./workspaces/docker-compose.yml', "  c9u".$user.":\n");
-                $fs->appendToFile('./workspaces/docker-compose.yml', "    container_name: c9u".$user."\n");
-                $fs->appendToFile('./workspaces/docker-compose.yml', "    image: mcaubrey/cloud9-s2"."\n");
-                $fs->appendToFile('./workspaces/docker-compose.yml', "    ports:"."\n");
-                $fs->appendToFile('./workspaces/docker-compose.yml', "      - 8".$user.":80"."\n");
-                $fs->appendToFile('./workspaces/docker-compose.yml', "      - 9".$user.":8080"."\n");
-                $fs->appendToFile('./workspaces/docker-compose.yml', "    environment:"."\n");
-                $fs->appendToFile('./workspaces/docker-compose.yml', "      WORKSPACE: '/var/www/html'"."\n");
-                $fs->appendToFile('./workspaces/docker-compose.yml', "    volumes:"."\n");
-                $fs->appendToFile('./workspaces/docker-compose.yml', "      - ./".$user."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "  c9u".$user.":\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    container_name: c9u".$user."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    image: mcaubrey/cloud9-s2"."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    ports:"."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "      - 8".$user.":80"."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "      - 9".$user.":8080"."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    environment:"."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "      WORKSPACE: '/var/www/html'"."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    volumes:"."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "      - ./".$user."\n");
             }
         }
     

@@ -2,7 +2,7 @@
 namespace Storm;
 use RuntimeException;
 use Storm\Terminal;
-use Symfony\Component\Filesystem\Filesystem;
+use Storm\Filesystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,9 +19,10 @@ class Down extends Command
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $term = new Terminal("./workspaces");
+        
         $fs = new Filesystem;
-        if ($fs->exists("./workspaces/docker-compose.yml")) {
+        $term = new Terminal($fs->getHome()."workspaces");
+        if ($fs->exists($fs->getHome()."workspaces/docker-compose.yml")) {
             $term->run("docker-compose down");
         } else {
             throw new RuntimeException("Cannot find a 'docker-compose.yml' file in \n".

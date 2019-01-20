@@ -1,7 +1,6 @@
 <?php
 
-// Based on BinaryTide's terminal function.
-// https://www.binarytides.com/execute-shell-commands-php/
+use Storm\Filesystem;
 
 namespace Storm;
 
@@ -12,6 +11,8 @@ class Terminal {
 	}
 	
 	function run($command)
+		// Based on BinaryTide's terminal function.
+		// https://www.binarytides.com/execute-shell-commands-php/
 		{
 		if ($this->context) {
 			$command = "(cd ".$this->context."; ".$command.")";
@@ -65,4 +66,5 @@ class Terminal {
 			'status' => $return_var
 		);
 		}
+		
 	}

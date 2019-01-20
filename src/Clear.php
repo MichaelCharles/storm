@@ -3,7 +3,7 @@ namespace Storm;
 use RuntimeException;
 use Storm\Terminal;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Filesystem\Filesystem;
+use Storm\Filesystem;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -38,17 +38,17 @@ class Clear extends Command
                          " in addition to bringing down the containers. In order to \n".
                          " only bring down the containers, run 'storm down' instead.", false)) {
             $fs = new Filesystem;
-            $term = new Terminal("./workspaces");
+            $term = new Terminal($fs->getHome()."workspaces");
             
             $output->writeln("<info>Attempting to bring down Docker containers...</info>");
-            if ($fs->exists('./workspaces/docker-compose.yml')) {
+            if ($fs->exists($fs->getHome().'workspaces/docker-compose.yml')) {
                 $e = $term->run('docker-compose down');
                 if (!$e["status"] == 0) {
                     throw new RuntimeException("Aborting cleanup due to error encountered when running 'docker-compose down'.");
                 }
             }
             $output->writeln("<info>Attempting to remove workspaces...</info>");
-            $fs->remove('./workspaces');
+            $fs->remove($fs->getHome().'workspaces');
         } else {
             $output->writeln("<info>Canceling...</info>");
         }
