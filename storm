@@ -5,10 +5,11 @@ if (file_exists(__DIR__.'/../../autoload.php')) {
 } else {
     require __DIR__.'/vendor/autoload.php';
 }
-$app = new Symfony\Component\Console\Application('Storm for Cloud9', '1.3.0');
+$app = new Symfony\Component\Console\Application('Storm for Cloud9', '1.4.0');
 $app->add(new Storm\Conjure);
 $app->add(new Storm\Make);
 $app->add(new Storm\Clear);
 $app->add(new Storm\Up);
 $app->add(new Storm\Down);
+$app->add(new Storm\Run);
 $app->run();
