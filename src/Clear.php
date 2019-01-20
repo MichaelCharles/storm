@@ -49,6 +49,9 @@ class Clear extends Command
             }
             $output->writeln("<info>Attempting to remove workspaces...</info>");
             $fs->remove($fs->getHome().'workspaces');
+            if (!$fs->exists($fs->getHome().'workspaces')) {
+                $output->writeln("<info>Successfully removed workspaces.</info>");
+            }
         } else {
             $output->writeln("<info>Canceling...</info>");
         }

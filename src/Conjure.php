@@ -52,7 +52,7 @@ class Conjure extends Command
             foreach ($usersArray as $user) {
                 $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "  c9u".$user.":\n");
                 $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    container_name: c9u".$user."\n");
-                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    image: mcaubrey/cloud9-s2"."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    image: mcaubrey/cloud9-s2:student"."\n");
                 $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    ports:"."\n");
                 $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "      - 8".$user.":80"."\n");
                 $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "      - 9".$user.":8080"."\n");
