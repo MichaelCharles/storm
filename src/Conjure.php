@@ -44,10 +44,10 @@ class Conjure extends Command
     
     protected function makeDockerComposeFile($count, Filesystem $fs)
         {
+            $usersArray = $this->makeUsersArray($count);
+            
             $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "version: '3'"."\n");
             $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "services:"."\n");
-            
-            $usersArray = $this->makeUsersArray($count);
             
             foreach ($usersArray as $user) {
                 $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "  c9u".$user.":\n");
@@ -68,14 +68,15 @@ class Conjure extends Command
         for ($x = 1; $x <= $count; $x++) {
             if (strlen($x) == 1) {
                 $usersArray[] = "00".$x;
-            } elseif (strlen($count) == 2) {
-                $usesrArray[] = "0".$x;
-            } elseif (strlen($count) === 3) {
+            } elseif (strlen($x) == 2) {
+                $usersArray[] = "0".$x;
+            } elseif (strlen($x) === 3) {
                 $usersArray[] = $x;
             } else {
                 throw new RuntimeException('The number of Cloud9 instances must be under 1000.');
             }
         } 
+
         return $usersArray;
     }
 }
