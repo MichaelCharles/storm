@@ -59,7 +59,7 @@ class Conjure extends Command
                 $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    environment:"."\n");
                 $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "      WORKSPACE: '/var/www/html'"."\n");
                 $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "    volumes:"."\n");
-                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "      - ./".$user."\n");
+                $fs->appendToFile($fs->getHome().'workspaces/docker-compose.yml', "      - ./".$user.":/var/www/html\n");
             }
         }
     
