@@ -69,7 +69,7 @@ class Conjure extends Command
             if (strlen($x) == 1) {
                 $usersArray[] = "00".$x;
             } elseif (strlen($count) == 2) {
-                $usesrArray[] = "0".$x;
+                $usersArray[] = "0".$x;
             } elseif (strlen($count) === 3) {
                 $usersArray[] = $x;
             } else {
